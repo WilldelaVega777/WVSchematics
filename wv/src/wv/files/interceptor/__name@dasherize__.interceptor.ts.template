@@ -1,0 +1,44 @@
+//-----------------------------------------------------------------------------------
+// Imports Section (Angular)
+//-----------------------------------------------------------------------------------
+import { Injectable }            from '@angular/core';
+import { HttpRequest }           from '@angular/common/http';
+import { HttpHandler }           from '@angular/common/http';
+import { HttpEvent }             from '@angular/common/http';
+import { HttpInterceptor }       from '@angular/common/http';
+
+//-----------------------------------------------------------------------------------
+// Imports Section (RxJS)
+//-----------------------------------------------------------------------------------
+import { Observable }            from 'rxjs';
+
+
+//-----------------------------------------------------------------------------------
+// Injectable Interceptor Section 
+//-----------------------------------------------------------------------------------
+@Injectable()
+//-----------------------------------------------------------------------------------
+// Class Section
+//-----------------------------------------------------------------------------------
+export class <%= classify(name) %>Interceptor implements HttpInterceptor {
+
+    //-------------------------------------------------------------------------------
+    // Constructor Method Section
+    //-------------------------------------------------------------------------------
+    constructor() 
+    {
+
+    }
+
+
+    //-------------------------------------------------------------------------------
+    // Interceptor Implementation Method Section
+    //-------------------------------------------------------------------------------
+    intercept(
+        request: HttpRequest<unknown>, 
+        next: HttpHandler
+    ): Observable<HttpEvent<unknown>> 
+    {
+        return next.handle(request);
+    }
+}

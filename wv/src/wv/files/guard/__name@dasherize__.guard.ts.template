@@ -1,0 +1,42 @@
+//-----------------------------------------------------------------------------------
+// Imports Section
+//-----------------------------------------------------------------------------------
+import { Injectable }                   from '@angular/core';
+<% if (canActivate) { %>import { CanActivate }                  from '@angular/core';<% } %>
+<% if (canActivateChild) { %>import { CanActivateChild }             from '@angular/core';<% } %>
+<% if (canLoad) { %>import { CanLoad }                      from '@angular/core';<% } %>
+import { ActivatedRouteSnapshot }       from '@angular/router';
+import { RouterStateSnapshot }          from '@angular/router';
+import { UrlTree }                      from '@angular/router';
+import { Observable }                   from 'rxjs';
+
+//-----------------------------------------------------------------------------------
+// Service Attribute Section
+//-----------------------------------------------------------------------------------
+@Injectable({
+    providedIn: 'root'
+})
+//-----------------------------------------------------------------------------------
+// Class Section
+//-----------------------------------------------------------------------------------
+
+// You may need to add commas to the interface implementations... please delete this comment...
+
+export class <%= classify(name) %>Guard implements <% if (canActivate) { %>CanActivate <% } %><% if (canActivateChild) { %>CanActivateChild <% } %><% if (canLoad) { %>CanLoad <% } %>
+{
+    <% if (canActivate) { %>canActivate(
+        next    : ActivatedRouteSnapshot,
+        state   : RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+        return true;
+    }
+    <% } %><% if (canActivateChild) { %>canActivateChild(
+        next    : ActivatedRouteSnapshot,
+        state   : RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+        return true;
+    }
+    <% } %><% if (canLoad) { %>canLoad(
+        route   : Route,
+        segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
+        return true;
+    }<% } %>
+}

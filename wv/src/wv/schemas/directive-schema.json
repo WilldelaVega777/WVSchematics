@@ -1,0 +1,42 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "WVDirectiveSchematic",
+    "title": "ng new wv-Directive options schema",
+    "type": "object",
+    "description": "Create a new directive",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "The name of the directive",
+            "x-prompt": "Name:",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            }
+        },
+        "selector": {
+            "type": "string",
+            "description": "The name of the selector",
+            "x-prompt": "Selector:",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            }
+        },
+        "path": {
+            "type": "string",
+            "description": "The path of the enum to be created",
+            "$default": {
+                "$source": "argv",
+                "index": 1
+            }
+        },
+        "project": {
+            "type": "string",
+            "description": "The project of enum module.",
+            "$default": {
+              "$source": "projectName"
+            }
+        }        
+    }
+}

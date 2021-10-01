@@ -1,0 +1,48 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "WVModelSchematic",
+    "title": "ng new wv-Model options schema",
+    "type": "object",
+    "description": "Initialise a new WVModel",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "The name of the model",
+            "x-prompt": "Name:",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            }
+        },
+        "path": {
+            "type": "string",
+            "description": "The path of the routing module to be created",
+            "$default": {
+                "$source": "argv",
+                "index": 1
+            }
+        },
+        "project": {
+            "type": "string",
+            "description": "The project of the routing module.",
+            "$default": {
+              "$source": "projectName"
+            }
+        },        
+        "modelType": {
+            "description": "Wether the model will be an interface or a class",
+            "enum": ["Interface", "Class"],
+            "type": "string",
+            "default": "Interface",
+            "x-prompt": "How should I generate this file?"
+        },
+        "modelDirection": {
+            "description": "Wether the model will represent a Request or Response message",
+            "enum": ["Request", "Response"],
+            "type": "string",
+            "default": "Response",
+            "alias": "c",
+            "x-prompt": "How will this model be used?"
+        }        
+    }
+}

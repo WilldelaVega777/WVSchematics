@@ -1,0 +1,60 @@
+{
+    "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+    "schematics": {
+        "wv-view": {
+            "description"   : "Customized Angular View for WV projects.",
+            "factory"       : "./wv/factories/view#newView",
+            "schema"        : "./wv/schemas/view-schema.json" 
+        },
+        "wv-component": {
+            "description"   : "Customized Angular Component for WV projects.",
+            "factory"       : "./wv/factories/component#newComponent",
+            "schema"        : "./wv/schemas/component-schema.json" 
+        },
+        "wv-service": {
+            "description"   : "Customized Angular Service for WV projects.",
+            "factory"       : "./wv/factories/service#newService",
+            "schema"        : "./wv/schemas/service-schema.json" 
+        },
+        "wv-module": {
+            "description"   : "Customized Angular Module for WV projects.",
+            "factory"       : "./wv/factories/module#newModule",
+            "schema"        : "./wv/schemas/module-schema.json" 
+        },
+        "wv-route": {
+            "description"   : "Customized Angular Route Module for WV projects.",
+            "factory"       : "./wv/factories/route#newRoute",
+            "schema"        : "./wv/schemas/route-schema.json" 
+        },
+        "wv-model": {
+            "description"   : "Customized Angular Model for WV projects.",
+            "factory"       : "./wv/factories/model#newModel",
+            "schema"        : "./wv/schemas/model-schema.json" 
+        },
+        "wv-enum": {
+            "description"   : "Customized TS Enum for WV projects.",
+            "factory"       : "./wv/factories/enum#newEnum",
+            "schema"        : "./wv/schemas/enum-schema.json" 
+        },
+        "wv-directive": {
+            "description"   : "Customized Angular Directive for WV projects.",
+            "factory"       : "./wv/factories/directive#newDirective",
+            "schema"        : "./wv/schemas/directive-schema.json" 
+        },
+        "wv-guard": {
+            "description"   : "Customized Angular Guard for WV projects.",
+            "factory"       : "./wv/factories/guard#newGuard",
+            "schema"        : "./wv/schemas/guard-schema.json" 
+        },
+        "wv-interceptor": {
+            "description"   : "Customized Angular Interceptor for WV projects.",
+            "factory"       : "./wv/factories/interceptor#newInterceptor",
+            "schema"        : "./wv/schemas/interceptor-schema.json" 
+        },
+        "wv-pipe": {
+            "description"   : "Customized Angular Pipe for WV projects.",
+            "factory"       : "./wv/factories/pipe#newPipe",
+            "schema"        : "./wv/schemas/pipe-schema.json" 
+        }
+    }
+} 

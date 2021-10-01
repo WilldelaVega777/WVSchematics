@@ -1,0 +1,42 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "WVPipeSchematic",
+    "title": "ng new wv-Pipe options schema",
+    "type": "object",
+    "description": "Create a new pipe",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "The name of the pipe",
+            "x-prompt": "Name:",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            }
+        },
+        "path": {
+            "type": "string",
+            "description": "The path of the pipe to be created",
+            "$default": {
+                "$source": "argv",
+                "index": 1
+            }
+        },
+        "project": {
+            "type": "string",
+            "description": "The project of pipe module.",
+            "$default": {
+              "$source": "projectName",
+              "index": 2              
+            }
+        },
+        "module": {
+            "type": "string",
+            "description": "The module for this pipe."
+        },
+        "export": {
+            "type": "boolean",
+            "description": "Is this Pipe to be exported?."
+        }         
+    }
+}

@@ -1,0 +1,153 @@
+//-----------------------------------------------------------------------------------
+// Imports Section
+//-----------------------------------------------------------------------------------
+import { Component }                        from '@angular/core';
+import { ViewChild }                        from '@angular/core';
+import { Input }                            from '@angular/core';
+import { Output }                           from '@angular/core';
+import { OnInit }                           from '@angular/core';
+import { OnDestroy }                        from '@angular/core';
+import { ViewEncapsulation }                from '@angular/core';
+
+//-----------------------------------------------------------------------------------
+// Imports Section (Router)
+//-----------------------------------------------------------------------------------
+import { Router }                           from '@angular/router';
+import { ActivatedRoute }                   from '@angular/router';
+
+//-----------------------------------------------------------------------------------
+// Imports Section (RxJS)
+//-----------------------------------------------------------------------------------
+import { Subject }                          from 'rxjs';
+import { takeUntil }                        from 'rxjs/operators';
+
+//-----------------------------------------------------------------------------------
+// Imports Section (i18n)
+//-----------------------------------------------------------------------------------
+import { FuseTranslationLoaderService }     from '@fuse/services/translation-loader.service';
+import { TranslateService }                 from '@ngx-translate/core';
+import { locale as english }                from '../../i18n/en';
+import { locale as spanish }                from '../../i18n/es';
+
+//-----------------------------------------------------------------------------------
+// Imports Section (Animations)
+//-----------------------------------------------------------------------------------
+import { fuseAnimations }                   from '@fuse/animations';
+import { flipInYAnimation }                 from 'app/_shared/animations/transitions.barrel';
+
+//-----------------------------------------------------------------------------------
+// Imports Section (Services & Models)
+//-----------------------------------------------------------------------------------
+import { UIService }                        from 'app/_core/services/ui.service';
+
+
+//-----------------------------------------------------------------------------------
+// Component Declaration Section
+//-----------------------------------------------------------------------------------
+@Component({<% if(!skipSelector) {%>
+    selector       : '<%= dasherize(name) %>',<%}%><% if(inlineTemplate) { %>
+    template       : `
+    <p>
+        <%= dasherize(name) %> works!
+    </p>
+    `,<% } else { %>
+    templateUrl    : './<%= dasherize(name) %>.page.html',<% } if(inlineStyle) { %>
+    styles         : []<% } else { %>
+    styleUrls      : ['./<%= dasherize(name) %>.page.<%= style %>']<% } %><% if(!!viewEncapsulation) { %>,
+    encapsulation  : ViewEncapsulation.<%= viewEncapsulation %><% } if (changeDetection !== 'Default') { %>,
+    changeDetection: ChangeDetectionStrategy.<%= changeDetection %><% } %>,
+    animations     : [fuseAnimations, flipInYAnimation]
+})
+//-----------------------------------------------------------------------------------
+// Page Class Section
+//-----------------------------------------------------------------------------------
+export class <%= classify(name) %>Page implements OnInit, OnDestroy
+{
+    //-------------------------------------------------------------------------------
+    // ViewChild Components
+    //-------------------------------------------------------------------------------
+
+
+    //-------------------------------------------------------------------------------
+    // Input Attributes Section
+    //-------------------------------------------------------------------------------
+
+
+    //-------------------------------------------------------------------------------
+    // Output Events Section
+    //-------------------------------------------------------------------------------
+
+
+    //-------------------------------------------------------------------------------
+    // Public Fields Section
+    //-------------------------------------------------------------------------------
+    public flipInY                          : any;
+
+
+    //-------------------------------------------------------------------------------
+    // Private Fields Section
+    //-------------------------------------------------------------------------------
+    private routerService                   : Router;
+    private route                           : ActivatedRoute;    
+    private _fuseTranslationLoaderService   : FuseTranslationLoaderService;
+    private _translateService               : TranslateService;
+    private _locale                         : string;
+    private _uiService                      : UIService;
+    private _unsubscribeAll                 : Subject<any>;
+
+
+    //-------------------------------------------------------------------------------
+    // Constructor Method Section
+    //-------------------------------------------------------------------------------
+    constructor(
+        pRouterService                      : Router,
+        pRoute                              : ActivatedRoute,        
+        pFuseTranslationLoaderService       : FuseTranslationLoaderService,
+        pTranslateService                   : TranslateService,
+        pUIService                          : UIService
+    )
+    {
+        //Params
+        this.routerService                  = pRouterService;
+        this.route                          = pRoute;        
+        this._fuseTranslationLoaderService  = pFuseTranslationLoaderService;
+        this._translateService              = pTranslateService;
+        this._uiService                     = pUIService;
+
+        // Set Default Language
+        this._fuseTranslationLoaderService.loadTranslations(english, spanish);
+        this._locale = navigator.languages[0].substr(0, 2);
+        this._translateService.use(this._locale);
+
+        // Set the private defaults
+        this._unsubscribeAll                = new Subject();
+    }
+
+
+    //-------------------------------------------------------------------------------
+    // Lifecycle Events Section
+    //-------------------------------------------------------------------------------
+    ngOnInit()
+    {
+        // Set View Title
+        this._uiService.currentView = '';
+    }
+    //-------------------------------------------------------------------------------
+    ngOnDestroy()
+    {
+        // Unsubscribe from all subscriptions
+        this._unsubscribeAll.next();
+        this._unsubscribeAll.complete();
+    }
+
+
+    //-------------------------------------------------------------------------------
+    // Eventhandler Methods Section
+    //-------------------------------------------------------------------------------
+
+
+    //-------------------------------------------------------------------------------
+    // Private Methods Section
+    //-------------------------------------------------------------------------------
+
+}

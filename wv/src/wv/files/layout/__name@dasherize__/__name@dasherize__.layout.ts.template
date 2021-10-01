@@ -1,0 +1,91 @@
+//----------------------------------------------------------------------------
+// Imports Section (Angular)
+//----------------------------------------------------------------------------
+import { Component }                  from '@angular/core';
+import { OnInit }                     from '@angular/core';
+import { OnDestroy }                  from '@angular/core';
+import { ViewEncapsulation }          from '@angular/core';
+
+//----------------------------------------------------------------------------
+// Imports Section (RxJS)
+//----------------------------------------------------------------------------
+import { Subject }                    from 'rxjs';
+import { takeUntil }                  from 'rxjs/operators';
+
+//----------------------------------------------------------------------------
+// Imports Section (Fuse)
+//----------------------------------------------------------------------------
+import { FuseConfigService }          from '@fuse/services/config.service';
+
+//----------------------------------------------------------------------------
+// Imports Section (Navigation)
+//----------------------------------------------------------------------------
+import { navigation }                 from 'app/_core/config/navigation/navigation';
+    
+
+//----------------------------------------------------------------------------
+// Component Configuration Section
+//----------------------------------------------------------------------------
+@Component({
+    selector     : '<%= dasherize(name) %>',
+    templateUrl  : './<%= dasherize(name) %>.component.html',
+    styleUrls    : ['./<%= dasherize(name) %>.component.scss'],
+    encapsulation: ViewEncapsulation.None
+})
+//----------------------------------------------------------------------------
+// Component Class Section
+//----------------------------------------------------------------------------
+export class <%= classify(name) %>Component implements OnInit, OnDestroy
+{
+    //------------------------------------------------------------------------
+    // Public Fields Section
+    //------------------------------------------------------------------------
+    public fuseConfig             : any;
+    public navigation             : any;
+
+    //------------------------------------------------------------------------
+    // Private Fields Section
+    //------------------------------------------------------------------------
+    private _unsubscribeAll      : Subject<any>;
+    private _fuseConfigService   : FuseConfigService;
+
+    
+    //------------------------------------------------------------------------
+    // Constructor Method Section
+    //------------------------------------------------------------------------
+    constructor(
+        private pFuseConfigService: FuseConfigService
+    )
+    {
+        // Parameters
+        this._fuseConfigService = pFuseConfigService;
+
+        // Set the defaults
+        this.navigation = navigation;
+
+        // Set the private defaults
+        this._unsubscribeAll = new Subject();
+    }
+
+
+    //------------------------------------------------------------------------
+    // Component Lifecycle Eventhandler Methods Section
+    //------------------------------------------------------------------------
+    ngOnInit(): void
+    {
+        // Subscribe to config changes
+        this._fuseConfigService.config
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((config) => {
+                this.fuseConfig = config;
+            });
+    }
+
+   //------------------------------------------------------------------------
+    ngOnDestroy(): void
+    {
+        // Unsubscribe from all subscriptions
+        this._unsubscribeAll.next();
+        this._unsubscribeAll.complete();
+    }
+}

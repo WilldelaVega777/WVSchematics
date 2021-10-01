@@ -1,0 +1,28 @@
+{
+  "name": "wv",
+  "version": "0.0.5",
+  "description": "WV Schematics Project Alpha",
+  "scripts": {
+      
+  },
+  "keywords": [
+    "schematics"
+  ],
+  "author": "",
+  "license": "MIT",
+  "schematics": "./collection.json",
+  "dependencies": {
+    "@angular-devkit/core": "^10.0.6",
+    "@angular-devkit/schematics": "^10.0.6",
+    "typescript": "~3.9.7"
+  },
+  "devDependencies": {
+    "@types/jasmine": "~3.5.0",
+    "@types/node": "^12.11.1",
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-filter": "^6.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "jasmine": "^3.5.0"
+  }
+}

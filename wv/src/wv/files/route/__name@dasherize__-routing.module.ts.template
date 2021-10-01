@@ -1,0 +1,52 @@
+//-------------------------------------------------------------------------
+// Imports Section
+//-------------------------------------------------------------------------
+import { NgModule }                      from '@angular/core';
+import { Routes }                        from '@angular/router';
+import { RouterModule }                  from '@angular/router';
+
+//-------------------------------------------------------------------------
+// Imports Section (Guard)
+//-------------------------------------------------------------------------
+import { AuthGuard }                     from 'app/_security/services/guards/auth-guard.service';
+import { UnauthGuard }                   from 'app/_security/services/guards/unauth-guard.service';
+
+//-------------------------------------------------------------------------
+// Imports Section (Views in Module)
+//-------------------------------------------------------------------------
+import { <%= classify(name) %>Page }            from 'app/<%= dasherize(name) %>/views/<%= dasherize(name) %>/<%= dasherize(name) %>.page';
+
+//-------------------------------------------------------------------------
+// Imports Section (Services)
+//-------------------------------------------------------------------------
+import { <%= classify(name) %>Service }         from 'app/<%= dasherize(name) %>/services/<%= dasherize(name) %>.service';
+
+
+//-------------------------------------------------------------------------
+// Routes Array Section
+//-------------------------------------------------------------------------
+const routes = [
+    {
+        path     : '**',
+        component: <%= classify(name) %>Page,
+        resolve  : {
+            <%= camelize(name) %>: <%= classify(name) %>Service
+        },
+        canActivate: [AuthGuard]
+    }
+];
+
+//-------------------------------------------------------------------------
+// Module Definition Section
+//-------------------------------------------------------------------------
+@NgModule({
+    imports    : [RouterModule.forChild(routes)],
+    exports    : [RouterModule],
+    providers  : [
+        <%= classify(name) %>Service
+    ]
+})
+//-------------------------------------------------------------------------
+// Module Class Secton (Empty)
+//-------------------------------------------------------------------------
+export class <%= classify(name) %>RoutingModule {}
